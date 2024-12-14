@@ -10,7 +10,7 @@ Content-Type: application/json
 
 {
   "name": "luqman",
-  "email": "luqman@gmail.com",
+  "email": "luq@gmail.com",
   "password": "password123",
   "role": "admin"
 }
@@ -22,7 +22,7 @@ POST http://localhost:5000/api/auth/login
 Content-Type: application/json
 
 {
-  "email": "luqman@gmail.com",
+  "email": "luq@gmail.com",
   "password": "password123"
 }
 
@@ -39,9 +39,11 @@ Content-Type: application/json
 ## Create a new poll (Admin only)
 POST http://localhost:5000/api/polls/create
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NWQ2NmQxMWNiNDM4ZjQxM2Y3NDA0NyIsImlhdCI6MTczNDE3NDQyNSwiZXhwIjoxNzQxOTUwNDI1fQ.-f7dOA8gPZDQfdbc7HX06gunQGu60r7fTzgfGTAcVCY.3kRnw1AJZsM3klYBt8q-dtwKp4bIfm2o-xmeXc-Cxmc
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NWQ2ZGNhYTlhZmQ4YmYwNGMyYjc4ZSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTczNDE3NjQ2MywiZXhwIjoxNzQxOTUyNDYzfQ.d4WNU2jMuVAdDIH0517UEaEkSNWfFJDyvPMjq-7SrDY
+
 
 {
+  "title": "poll pooll poll?",
   "question": "What is your favorite color?",
   "options": ["Red", "Blue", "Green", "Yellow"]
 }
@@ -56,9 +58,10 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhbGciOiJIUzI1NiIsI
 ### 
 
 ## Publish a poll (Admin only)
-PUT http://localhost:5000/api/polls/publish/{{pollId}}
+PUT http://localhost:5000/api/polls/publish/675d704d07a315fa5e9304ea
 Content-Type: application/json
-Authorization: Bearer {{jwt_token}}
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NWQ2ZGNhYTlhZmQ4YmYwNGMyYjc4ZSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTczNDE3NjQ2MywiZXhwIjoxNzQxOTUyNDYzfQ.d4WNU2jMuVAdDIH0517UEaEkSNWfFJDyvPMjq-7SrDY
+
 
 # Response:
 # {
@@ -69,7 +72,7 @@ Authorization: Bearer {{jwt_token}}
 
 ## Get all polls (Admin or User)
 GET http://localhost:5000/api/polls
-Authorization: Bearer {{jwt_token}}
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NWQ2ZGNhYTlhZmQ4YmYwNGMyYjc4ZSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTczNDE3NjQ2MywiZXhwIjoxNzQxOTUyNDYzfQ.d4WNU2jMuVAdDIH0517UEaEkSNWfFJDyvPMjq-7SrDY
 
 # Response:
 # [
@@ -87,35 +90,45 @@ Authorization: Bearer {{jwt_token}}
 #   }
 # ]
 
-### 
-
-# Get poll results (Admin only)
-GET http://localhost:5000/api/polls/{{pollId}}/results
-Authorization: Bearer {{jwt_token}}
-
-# Response:
-# {
-#   "pollId": "unique_poll_id_1",
-#   "question": "What is your favorite color?",
-#   "results": {
-#     "Red": 5,
-#     "Blue": 10,
-#     "Green": 3,
-#     "Yellow": 2
-#   }
-# }
 
 ### 
 
+
+
+
+
+## Register a new user (test for users who cast vote)
+POST http://localhost:5000/api/auth/register
+Content-Type: application/json
+
+{
+  "name": "luqmanvoter",
+  "email": "luqvoter@gmail.com",
+  "password": "password123",
+  "role": "user"
+}
+
+### 
+
+## Login user and get JWT token
+POST http://localhost:5000/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "luqvoter@gmail.com",
+  "password": "password123"
+}
+
+###
 # 3. Voting (User)
 
 ## Cast a vote on a poll
 POST http://localhost:5000/api/votes/cast
 Content-Type: application/json
-Authorization: Bearer {{jwt_token}}
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NWQ3MWZmMDdhMzE1ZmE1ZTkzMDRmMCIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzM0MTc3Mjg3LCJleHAiOjE3NDE5NTMyODd9.K-Pv78qJS1wBbU-Un9oSGWXOxLLoh-tn6e3bnUaIY4I
 
 {
-  "pollId": "unique_poll_id",
+  "pollId": "675d704d07a315fa5e9304ea",
   "option": "Blue"
 }
 
