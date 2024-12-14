@@ -1,0 +1,136 @@
+# -------------------------------
+# API Documentation & Testing
+# -------------------------------
+
+# 1. User Authentication
+
+## Register a new user
+POST http://localhost:5000/api/auth/register
+Content-Type: application/json
+
+{
+  "name": "luqman",
+  "email": "luqman@example1.com",
+  "password": "password123",
+  "role": "admin"
+}
+
+### 
+
+## Login user and get JWT token
+POST http://localhost:5000/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "luqman@example1.com",
+  "password": "password123"
+}
+
+# Response:
+# {
+#   "message": "Login successful",
+#   "token": "your_jwt_token"
+# }
+
+### 
+
+# 2. Poll Management (Admin)
+
+## Create a new poll (Admin only)
+POST http://localhost:5000/api/polls/create
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NWQ1NzhhZDY2MzllMTRkNDI1YzBlZiIsImlhdCI6MTczNDE3MDUxMywiZXhwIjoxNzM0MTc0MTEzfQ.59kinv7Zy58QXrcSV0X-mM0X8UKYokLpIfPkNwFeWcI
+
+{
+  "question": "What is your favorite color?",
+  "options": ["Red", "Blue", "Green", "Yellow"]
+}
+
+
+# Response:
+# {
+#   "message": "Poll created successfully",
+#   "pollId": "unique_poll_id"
+# }
+
+### 
+
+## Publish a poll (Admin only)
+PUT http://localhost:5000/api/polls/publish/{{pollId}}
+Content-Type: application/json
+Authorization: Bearer {{jwt_token}}
+
+# Response:
+# {
+#   "message": "Poll published successfully"
+# }
+
+### 
+
+## Get all polls (Admin or User)
+GET http://localhost:5000/api/polls
+Authorization: Bearer {{jwt_token}}
+
+# Response:
+# [
+#   {
+#     "pollId": "unique_poll_id_1",
+#     "question": "What is your favorite color?",
+#     "options": ["Red", "Blue", "Green", "Yellow"],
+#     "createdAt": "2024-12-01T12:00:00Z"
+#   },
+#   {
+#     "pollId": "unique_poll_id_2",
+#     "question": "Which programming language do you prefer?",
+#     "options": ["JavaScript", "Python", "Java", "C#"],
+#     "createdAt": "2024-12-02T12:00:00Z"
+#   }
+# ]
+
+### 
+
+# Get poll results (Admin only)
+GET http://localhost:5000/api/polls/{{pollId}}/results
+Authorization: Bearer {{jwt_token}}
+
+# Response:
+# {
+#   "pollId": "unique_poll_id_1",
+#   "question": "What is your favorite color?",
+#   "results": {
+#     "Red": 5,
+#     "Blue": 10,
+#     "Green": 3,
+#     "Yellow": 2
+#   }
+# }
+
+### 
+
+# 3. Voting (User)
+
+## Cast a vote on a poll
+POST http://localhost:5000/api/votes/cast
+Content-Type: application/json
+Authorization: Bearer {{jwt_token}}
+
+{
+  "pollId": "unique_poll_id",
+  "option": "Blue"
+}
+
+# Response:
+# {
+#   "message": "Vote cast successfully"
+# }
+
+# Error Response (If user has already voted):
+# {
+#   "message": "You have already voted on this poll"
+# }
+
+### 
+
+# -------------------------------
+# End of API Documentation & Testing
+# -------------------------------
