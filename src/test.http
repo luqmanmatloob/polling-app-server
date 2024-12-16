@@ -41,13 +41,11 @@ POST http://localhost:5000/api/polls/create
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NWQ3ZmRjMzg0MmI0ODQ5NmY5MzkzZSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTczNDE4MDkwNiwiZXhwIjoxNzQxOTU2OTA2fQ.9hb-74NrJvhsuh-V94bnxhvhvr_TFM08OrqGVNYJvbU
 
-
 {
   "title": "poll pooll poll?",
   "question": "What is your favorite color?",
   "options": ["Red", "Blue", "Green", "Yellow"]
 }
-
 
 # Response:
 # {
@@ -72,6 +70,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NWVhMTI3Y
 ## Get all polls (Admin or User)
 GET http://localhost:5000/api/polls
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NWZhOWNkOGRkNzhhNjMyMzNhNzIxZSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTczNDMyMzc3MSwiZXhwIjoxNzQyMDk5NzcxfQ.gKUnW57yXo6_GT8gmD60GoKjMWnkfUISYE_8t21Y7bo
+
 # Response:
 # [
 #   {
@@ -88,36 +87,21 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NWZhOWNkO
 #   }
 # ]
 
-
 ### 
 
-
-
-
-
-## Register a new user (test for users who cast vote)
-POST http://localhost:5000/api/auth/register
+## Get Poll Result for a Specific Poll (with pollId)
+GET http://localhost:5000/api/polls/result/675fc1cc4daa34f521aed03d
 Content-Type: application/json
 
-{
-  "name": "luqmanvoter",
-  "email": "luqvoter@gmail.com",
-  "password": "password123",
-  "role": "user"
-}
-
-### 
-
-## Login user and get JWT token
-POST http://localhost:5000/api/auth/login
-Content-Type: application/json
-
-{
-  "email": "luqvoter@gmail.com",
-  "password": "password123"
-}
+# Response:
+# {
+#   "winningOption": "Blue",
+#   "voteCounts": [10, 5, 3, 2],
+#   "message": "Blue is winning with 10 votes"
+# }
 
 ###
+
 # 3. Voting (User)
 
 ## Cast a vote on a poll
@@ -145,17 +129,3 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NWQ3MWZmM
 # -------------------------------
 # End of API Documentation & Testing
 # -------------------------------
-
-
-
-
-### Test: Get Poll Result for a Specific Poll (with pollId)
-GET http://localhost:5000/api/polls/result/675fc1cc4daa34f521aed03d
-Content-Type: application/json
-
-### Expected Response:
-# {
-#   "winningOption": "Blue",
-#   "voteCounts": [10, 5, 3, 2],
-#   "message": "Blue is winning with 10 votes"
-# }

@@ -3,7 +3,7 @@ const Vote = require('../models/Vote');
 
 exports.castVote = async (req, res) => {
   try {
-    const { pollId, optionIndex } = req.body;
+    const { pollId, option } = req.body;  // Get the option name from the request body
     const userId = req.userId;
 
     // Check if user has already voted
@@ -14,7 +14,11 @@ exports.castVote = async (req, res) => {
     const poll = await Poll.findById(pollId);
     if (!poll) return res.status(404).json({ message: 'Poll not found' });
 
-    poll.votes[optionIndex]++;
+    // Find the index of the selected option
+    const optionIndex = poll.options.indexOf(option);  // This finds the index of the option
+    if (optionIndex === -1) return res.status(400).json({ message: 'Invalid option selected' });
+
+    poll.votes[optionIndex]++;  // Increment the vote count for the selected option
     await poll.save();
 
     // Save user's vote
