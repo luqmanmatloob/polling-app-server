@@ -1,5 +1,6 @@
 const Poll = require('../models/Poll');
 
+
 exports.createPoll = async (req, res) => {
   try {
     const { title, options } = req.body;
@@ -43,5 +44,38 @@ exports.getAllPolls = async (req, res) => {
     res.json(polls);
   } catch (error) {
     res.status(500).json({ error: error.message });
+  }
+};
+
+
+
+// Controller to get poll result and determine the winning option
+exports.getPollResult = async (req, res) => {
+  try {
+    const poll = await Poll.findById(req.params.pollId);
+
+    if (!poll) {
+      return res.status(404).json({ message: 'Poll not found' });
+    }
+
+    // Check if poll is published
+    if (!poll.isPublished) {
+      return res.status(400).json({ message: 'Poll has not been published yet' });
+    }
+
+    // Find the option with the highest votes
+    const maxVotes = Math.max(...poll.votes);
+    const winningOptionIndex = poll.votes.indexOf(maxVotes);
+    const winningOption = poll.options[winningOptionIndex];
+
+    // Return the result
+    res.status(200).json({
+      winningOption,
+      voteCounts: poll.votes,
+      message: `${winningOption} is winning with ${maxVotes} votes`
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server error' });
   }
 };

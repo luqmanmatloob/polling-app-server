@@ -145,3 +145,17 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NWQ3MWZmM
 # -------------------------------
 # End of API Documentation & Testing
 # -------------------------------
+
+
+
+
+### Test: Get Poll Result for a Specific Poll (with pollId)
+GET http://localhost:5000/api/polls/result/675fc1cc4daa34f521aed03d
+Content-Type: application/json
+
+### Expected Response:
+# {
+#   "winningOption": "Blue",
+#   "voteCounts": [10, 5, 3, 2],
+#   "message": "Blue is winning with 10 votes"
+# }
