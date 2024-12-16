@@ -27,9 +27,19 @@ exports.publishPoll = async (req, res) => {
   }
 };
 
-exports.getPolls = async (req, res) => {
+exports.getPublishedPolls = async (req, res) => {
   try {
     const polls = await Poll.find({ isPublished: true });
+    res.json(polls);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+
+exports.getAllPolls = async (req, res) => {
+  try {
+    const polls = await Poll.find(); 
     res.json(polls);
   } catch (error) {
     res.status(500).json({ error: error.message });

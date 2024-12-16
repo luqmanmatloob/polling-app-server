@@ -10,9 +10,9 @@ Content-Type: application/json
 
 {
   "name": "luqman",
-  "email": "luq@gmail.com",
+  "email": "luq1@gmail.com",
   "password": "password123",
-  "role": "admin"
+  "role": "user"
 }
 
 ### 
@@ -39,7 +39,7 @@ Content-Type: application/json
 ## Create a new poll (Admin only)
 POST http://localhost:5000/api/polls/create
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NWQ2ZGNhYTlhZmQ4YmYwNGMyYjc4ZSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTczNDE3NjQ2MywiZXhwIjoxNzQxOTUyNDYzfQ.d4WNU2jMuVAdDIH0517UEaEkSNWfFJDyvPMjq-7SrDY
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NWQ3ZmRjMzg0MmI0ODQ5NmY5MzkzZSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTczNDE4MDkwNiwiZXhwIjoxNzQxOTU2OTA2fQ.9hb-74NrJvhsuh-V94bnxhvhvr_TFM08OrqGVNYJvbU
 
 
 {
@@ -60,8 +60,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NWQ2ZGNhY
 ## Publish a poll (Admin only)
 PUT http://localhost:5000/api/polls/publish/675d704d07a315fa5e9304ea
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NWQ2ZGNhYTlhZmQ4YmYwNGMyYjc4ZSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTczNDE3NjQ2MywiZXhwIjoxNzQxOTUyNDYzfQ.d4WNU2jMuVAdDIH0517UEaEkSNWfFJDyvPMjq-7SrDY
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NWVhMTI3Y2U5MWY4ZTAxMWM0YjllYSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTczNDI2ODY1MCwiZXhwIjoxNzQyMDQ0NjUwfQ.sOQhbd8KCUdiB_F_QGJTLAR0-2NsQuDT-O2u5n6y6HI
 
 # Response:
 # {
@@ -72,8 +71,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NWQ2ZGNhY
 
 ## Get all polls (Admin or User)
 GET http://localhost:5000/api/polls
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NWQ2ZGNhYTlhZmQ4YmYwNGMyYjc4ZSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTczNDE3NjQ2MywiZXhwIjoxNzQxOTUyNDYzfQ.d4WNU2jMuVAdDIH0517UEaEkSNWfFJDyvPMjq-7SrDY
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NWZhOWNkOGRkNzhhNjMyMzNhNzIxZSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTczNDMyMzc3MSwiZXhwIjoxNzQyMDk5NzcxfQ.gKUnW57yXo6_GT8gmD60GoKjMWnkfUISYE_8t21Y7bo
 # Response:
 # [
 #   {
